@@ -7,7 +7,7 @@
  */
 session_start();
 
-if(empty($_SESSION['id'])) header("Location: index.php");
+if(empty($_SESSION['id'])) header("Location: login.php");
 
 include_once 'includes/login_database.php';
 include_once 'includes/functions.php';

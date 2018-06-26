@@ -14,15 +14,13 @@ function openNav() {
     document.getElementById("main").style.marginLeft = "200px";
     document.getElementById("left").style.marginLeft = "200px";
     document.getElementById("right").style.marginRight = "-100px";
-    //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 }
 
 function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
-    document.getElementById("left").style.marginLeft = "0";
+     document.getElementById("left").style.marginLeft = "0";
     document.getElementById("right").style.marginRight = "0";
-    //document.body.style.backgroundColor = "white";
 }
 </script>
 
@@ -49,12 +47,12 @@ h2{
 
 .left {
     left: 0;
-    background-color: #ce3500;
+    background-color: #0067a7;
 }
 
 .right {
     right: 0;
-    background-color: #ffab00;
+    background-color: #D65076;
 }
 
 .centered {
@@ -104,6 +102,12 @@ h2{
     margin-left: 50px;
 }
 
+.container-fluid{
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+}
+
 #main {
     transition: margin-left .5s;
     padding: 16px;
@@ -134,12 +138,12 @@ h2{
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="home.html">MIET JOB PORTAL</a>
+     <a class="navbar-brand" href="index.html">MIET JOB PORTAL</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Login</a></li>
-        <li><a href="home.html">Home</a></li>
+        <li class="active"><a href="#">Sign-Up</a></li>
+        <li><a href="index.html">Home</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -152,7 +156,7 @@ h2{
         <li><a href="#">Page 3</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="trysignup.html"><span class="glyphicon glyphicon-user "></span>Sign-Up</a></li>
+        <li><a href="trylogin.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
       </ul>
     </div>
   </div>
@@ -160,16 +164,15 @@ h2{
 
 <div class="split left" id="left">
   <div class="centered">
-   <a href="signup.html"><img src="img_avatar2.png" alt="Login as Employee">
-   <h2>LOGIN AS A JOB SEEKER</h2></a>
+   <a href="signup.php"><img src="images/img_avatar2.png" alt="SIGN-UP as Employee">
+   <h2>SIGN UP AS A JOB SEEKER</h2></a>
   </div>
 </div>
 
-
 <div class="split right" id="right">
   <div class="centered">
-   <a href="login.html">  <img src="img_avatar.png" alt="Login as Employer">
-    <h2>LOGIN AS A JOB PROVIDER</h2></a>
+   <a href="signup.php">  <img src="images/img_avatar.png" alt="SIGN-UP as Employer">
+    <h2>SIGN UP AS A JOB PROVIDER</h2></a>
   </div>
 </div>
      

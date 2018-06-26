@@ -78,7 +78,7 @@ if(isset($_POST['submit'])) {
 
     <!-- Textfield with Floating Label -->
     <div class="form">
-    <form action="index.php" method="post">
+    <form action="login.php" method="post">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
             <input class="mdl-textfield__input" type="text" id="sample3" name="email" value="<?php if(!empty($_POST['email']))echo $_POST['email']; ?>">
             <label class="mdl-textfield__label" for="sample3">Email</label>

@@ -9,4 +9,4 @@
 session_start();
 
 if(!empty($_SESSION['id'])) echo "Successfully Logged in";
-else header("Location: index.php");
+else header("Location: login.php");

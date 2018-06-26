@@ -7,11 +7,67 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+    document.getElementById("main").style.marginLeft = "200px";
+    document.getElementById("left").style.marginLeft = "200px";
+    document.getElementById("right").style.marginRight = "-100px";
+    //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft= "0";
+    document.getElementById("left").style.marginLeft = "0";
+    document.getElementById("right").style.marginRight = "0";
+    //document.body.style.backgroundColor = "white";
+}
+</script>
+
 <style>
 body {
     font-family: "Lato", sans-serif;
     transition: background-color .5s;
     background-color: #9b0a18;
+}
+
+h2{
+  color: #000;
+}
+
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 65px;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.left {
+    left: 0;
+    background-color: #ce3500;
+}
+
+.right {
+    right: 0;
+    background-color: #ffab00;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.centered img {
+    width: 150px;
+    border-radius: 50%;
 }
 
 .sidenav {
@@ -69,21 +125,21 @@ body {
   <a href="#">Contact</a>
 </div>
 
-<nav class="navbar navbar-inverse" id="main">
+<nav class="navbar navbar-inverse navbar-fixed-top" id="main">
   <div class="container-fluid">
     <div class="navbar-header">
       <span style="font-size:30px;cursor:pointer" onclick="openNav()"  class="navbar-brand" >&#9776;</span>
-      	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-
-      <a class="navbar-brand" href="home.html">MIET JOB PORTAL</a>
+      <a class="navbar-brand" href="index.html">MIET JOB PORTAL</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="#">Login</a></li>
+        <li><a href="index.html">Home</a></li>
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -96,31 +152,26 @@ body {
         <li><a href="#">Page 3</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="trysignup.html"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="trylogin.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="trysignup.html"><span class="glyphicon glyphicon-user "></span>Sign-Up</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-</span>
-
-
+<div class="split left" id="left">
+  <div class="centered">
+   <a href="login.php"><img src="images/img_avatar2.png" alt="Login as Employee">
+   <h2>LOGIN AS A JOB SEEKER</h2></a>
+  </div>
 </div>
 
-<script>
-function openNav() {
-    document.getElementById("mySidenav").style.width = "200px";
-    document.getElementById("main").style.marginLeft = "200px";
-    //document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
 
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-    document.getElementById("main").style.marginLeft= "0";
-    //document.body.style.backgroundColor = "white";
-}
-</script>
+<div class="split right" id="right">
+  <div class="centered">
+   <a href="login.php">  <img src="images/img_avatar.png" alt="Login as Employer">
+    <h2>LOGIN AS A JOB PROVIDER</h2></a>
+  </div>
+</div>
      
 </body>
 </html> 
