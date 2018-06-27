@@ -14,7 +14,8 @@ function check_email($email) {
 
 }
 
-function verify_email($email) {
+
+function verify_email($conn,$email) {
 
     $result = $conn->query("select * from student where email='$email'");
     if($result->num_rows > 0)
@@ -22,6 +23,7 @@ function verify_email($email) {
     return true;
 
 }
+
 
 function check_name($name) {
 

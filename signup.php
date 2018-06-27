@@ -1,12 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: groot
- * Date: 6/21/18
- * Time: 2:40 PM
- */
 
-session_start();
+//session_start();
 include_once 'includes/functions.php';
 include_once 'includes/login_database.php';
 $error_msg = '';
@@ -24,8 +18,7 @@ if(isset($_POST['submit'])) {
 //        echo $email;
             if (check_email($email)) {
 
-                if(verify_email($email)) {
-
+                if(verify_email($conn,$email)) {
                     $name = $_POST['name'];
 //            echo $name;
                     if (check_name($name)) {
@@ -61,6 +54,7 @@ if(isset($_POST['submit'])) {
                                     $result = $conn->query("insert into resume values ('$file_name',$id,null)");
                                     $conn->query("insert into locations values ($id,$location_id)");
                                     $_SESSION['id'] = $id;
+                                    $_SESSION['type'] = 'Student';
                                     header("Location: education.php"); //register=1
 
                                 } else
@@ -86,99 +80,77 @@ if(isset($_POST['submit'])) {
 }
 
 
-
+include_once 'header.php';
 ?>
 
-<html>
-
-<head>
-
-    <title>Signup</title>
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
-    <script src="scripts/ajax_json.js"></script>
-
-    <style>
-
-        .form {
-
-            margin-left: 50px;
-
-        }
-
-    </style>
-
-
-</head>
-
-
-<body>
-
-<!-- Simple Textfield -->
-<div class="form">
-<form action="signup.php" method="post" enctype="multipart/form-data">
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="sample1" name="name" value="<?php if(!empty($_POST['name'])) echo $_POST['name'] ?>">
-        <label class="mdl-textfield__label" for="sample1">Name</label>
-    </div><br>
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="sample2" name="email" value="<?php if(!empty($_POST['email'])) echo $_POST['email'] ?>">
-        <label class="mdl-textfield__label" for="sample2">Email</label>
-    </div><br>
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="password" id="sample3" name="password" value="<?php if(!empty($_POST['password'])) echo $_POST['password'] ?>">
-        <label class="mdl-textfield__label" for="sample3">Password</label>
-    </div><br>
-
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" name="number" value="<?php if(!empty($_POST['number'])) echo $_POST['number'] ?>">
-        <label class="mdl-textfield__label" for="sample24">Contact Number</label>
-        <span class="mdl-textfield__error">Input is not a number!</span>
-    </div><br>
-
-        Location: <select name="location" id="location" style="width:300px"></select><br><br>
-    <!-- Accent-colored raised button with ripple -->
-    Resume: <input type="file" name="resume"><br><br>
-
-    <button type="submit" name="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        Submit
-    </button>
-
-</form>
-    <?php
-    echo $error_msg;
-    ?>
+<div class="split sleft" id="left" >
+  <div class="centered">
+    <img src="assets/images/img_avatar2.png" alt="SIGN-UP as Student" onclick="ifleft()">
+    <h2 onclick="ifleft()">SIGN UP AS A JOB SEEKER</h2>
+  </div>
 </div>
 
+<div class="split sright" id="right">
+  <div class="centered">
+    <img src="assets/images/img_avatar.png" alt="SIGN-UP as Employer" onclick="ifright()">
+    <h2 onclick="ifright()">SIGN UP AS A JOB PROVIDER</h2>
+  </div>
+</div>
 
+<div id="leftreplace" class="split sleft" style="display: none">
+  <div class="centered">
+    <span class="glyphicon glyphicon-remove" style="float: right" onclick="splitinit()"></span>
+    <center><h3 style="font-family:serif ; color:black"><em><i>SIGN-UP</i></em></h3></center>
+    <form method="post" action="#">
+      <center>
+        <input type="text" id="name" placeholder="  Enter Name" class="ip" size="50%" required><br>
+        <input type="email" id="id" placeholder="  Enter Email-ID" size="50%" class="ip" required><br>
+        <input type="text" id="pass" size="50%" placeholder=" Enter Password" class="ip" required><br>
+        <input type="text" id="contact" size="50%" placeholder=" Enter Contact Number" class="ip" required><br>
+        <input type="text" id="location" size="50%" placeholder=" Enter Your City" class="ip" required><br><br>
+        <input type="submit" class="btn" value=" Register " style="margin-top:2px">
+      </center>
+    </form>
+  </div>
+</div>
+     
+<div id="rightreplace" class="split sright" style="display:none">
+  <div class="centered">
+    <span class="glyphicon glyphicon-remove" style="float: right" onclick="splitinit()"></span>
+    <center><h3 style="font-family:serif ; color:black"><em><i>SIGN-UP</i></em></h3></center>
+    <form method="post" action="signup.php" enctype="multipart/form-data">
+      <center>
+        <input type="text" id="name" name="name" placeholder="  Enter Name" class="ip" size="50%" required value="<?php if(!empty($_POST['name'])) echo $_POST['name'] ?>"><br>
+        <input type="email" id="id" name="email" placeholder="  Enter Email-ID" size="50%" class="ip" required value="<?php if(!empty($_POST['email'])) echo $_POST['email'] ?>"><br>
+        <input type="text" id="pass" name="password" size="50%" placeholder=" Enter Password" class="ip" required value="<?php if(!empty($_POST['password'])) echo $_POST['password'] ?>"><br>
+        <input type="text" id="contact" name="number" size="50%" placeholder=" Enter Contact Number" class="ip" required value="<?php if(!empty($_POST['number'])) echo $_POST['number'] ?>"><br>
+<!--        <input type="text" id="location" name="location" list="loc" size="50%" placeholder=" Enter Your City" class="ip" required><br><br>-->
+          <select  class="simple-select" name="location">
+              <option value="-1">Location</option>
+<!--          --><?php
+          $json = json_decode(file_get_contents('assets/json_data/locations.json'),true);
+//          print_r($json);
+          foreach ($json as $item) {
+              $id = $item['id'];
+              $text = $item['text'];
+              if(!empty($_POST['location']) && $_POST['location'] == $id)
+                  echo "<option selected value='$id'>$text</option>";
+              else
+                  echo "<option value='$id'>$text</option>";
+          }
+//          ?>
+          </select>
+        <em style="float:left; margin-left:10%; color:black; font-size: 20px">Upload Resume:</em>
+        <input value="<?php if(!empty($_FILES['resume'])) echo $_FILES['resume'] ?>" type="file" id="resume" class="file" name="resume" style="float: center" required><br>
+        <input type="submit" class="btn" value=" Register " name="submit" style="margin-top:2px">
+      </center>
+    </form>
+  </div>
+</div>
+
+<script src="assets/choosen/chosen.jquery.js"></script>
 <script>
-
-    $(document).ready(function () {
-        $.ajax({
-            url: 'json_data/locations.json',
-            type: 'GET',
-            dataType: 'JSON',
-            success: function (data) {
-
-                json = JSON.parse(JSON.stringify(data));
-                $('#location').select2({
-                    data: json
-                });
-            },
-        })
-    })
-
-
+    $('.simple-select').chosen({width: "334px"});
 </script>
-
 </body>
-
-
-</html>
+</html> 

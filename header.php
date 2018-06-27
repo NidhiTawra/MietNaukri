@@ -1,14 +1,22 @@
+<?php
+$file = basename($_SERVER['PHP_SELF'])
+?>
 <!DOCTYPE html>
 <html>
 <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <link rel="stylesheet" href="assets/stylesheets/style.css">
+    <script src="assets/scripts/script.js"></script>
+    <link rel="stylesheet" href="assets/choosen/chosen.css">
+    <script src="assets/choosen/chosen.jquery.js"></script>
 </head>
 <body>
 
@@ -45,16 +53,27 @@
                 </li>
                 <li><a href="#">Page 2</a></li>
                 <li><a href="#">Page 3</a></li>
+                <li><?php
+                    if ($error_msg != '') echo $error_msg;
+                    ?></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="trysignup.php"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="trylogin.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <?php
+
+                if($file == "login.php")
+                    echo "<li><a href=\"signup.php\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li>";
+                elseif($file == "signup.php")
+                    echo "<li><a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
+                else
+                    echo "<li><a href=\"signup.php\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li><li><a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>"
+                ?>
+
             </ul>
         </div>
     </div>
 </nav>
 
-</span>
-
-
-</div>
+<!--</span>-->
+<!---->
+<!---->
+<!--</div>-->

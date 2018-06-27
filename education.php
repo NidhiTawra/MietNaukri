@@ -140,7 +140,7 @@ if(isset($_POST['submit'])) {
     $(document).ready(function () {
         datalist = document.getElementById('qualification');
         $.ajax({
-            url: 'json_data/qualifications.json',
+            url: 'assets/json_data/qualifications.json',
             type: 'GET',
             dataType: 'JSON',
             success: function (data) {
@@ -161,7 +161,7 @@ if(isset($_POST['submit'])) {
         e = document.getElementById("qualification");
         id = e.options[e.selectedIndex].value;
         $.ajax({
-            url: 'ajax/course.php',
+            url: 'assets/ajax/course.php',
             type: 'GET',
             // url: 'json_data/'+id+'.json',
             dataType:'JSON',
@@ -193,7 +193,7 @@ if(isset($_POST['submit'])) {
         e = document.getElementById("course");
         id = e.options[e.selectedIndex].value;
         $.ajax({
-            url: 'ajax/specialization.php',
+            url: 'assets/ajax/specialization.php',
             type: 'GET',
             dataType: 'JSON',
             data: 'id='+id,

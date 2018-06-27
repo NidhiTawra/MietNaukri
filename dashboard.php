@@ -7,6 +7,6 @@
  */
 
 session_start();
-
+//echo "Successfully Logged in";
 if(!empty($_SESSION['id'])) echo "Successfully Logged in";
 else header("Location: login.php");

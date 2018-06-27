@@ -1,14 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: groot
- * Date: 6/20/18
- * Time: 3:24 PM
- */
-
 session_start();
 include_once 'includes/login_database.php';
+include_once 'includes/functions.php';
 $error_msg = '';
+
+destroy_session();
 
 if(!empty($_SESSION['id'])) {
 
@@ -16,11 +12,15 @@ if(!empty($_SESSION['id'])) {
 
 }
 if(isset($_POST['submit'])) {
-    if (!empty($_POST['email']) && !empty($_POST['password'])) {
 
+    if (!empty($_POST['unique-id']) && !empty($_POST['password'])) {
+
+        $email = $_POST['unique-id'];
+        $password = $_POST['password'];
+        $password = hash('sha512', $password);
         $id = '';
-        $stmt = $conn->prepare('select id from student where email=? and password=?');
-        $stmt->bind_param('ss', $_POST['email'], hash('sha512', $_POST['password']));
+        $stmt = $conn->prepare('select id from employer where unique_id=? and password=?');
+        $stmt->bind_param('ss', $email,$password);
         $stmt->execute();
         $stmt->store_result();
         $stmt->bind_result($id);
@@ -28,7 +28,34 @@ if(isset($_POST['submit'])) {
 
         if ($stmt->num_rows == 1) {
 
-            $_SESSION['id'] = hash('ripemd160', $id);
+            $_SESSION['id'] = $id;
+            $_SESSION['type'] = 'Employer';
+            header("Location: dashboard.php");
+
+        } else {
+
+            $error_msg = 'ID/Password is invalid';
+
+        }
+
+    }
+
+    elseif (!empty($_POST['email']) && !empty($_POST['password'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password = hash('sha512', $password);
+        $id = '';
+        $stmt = $conn->prepare('select id from student where email=? and password=?');
+        $stmt->bind_param('ss', $email,$password);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($id);
+        $stmt->fetch();
+
+        if ($stmt->num_rows == 1) {
+
+            $_SESSION['id'] = $id;
+            $_SESSION['type'] = 'Student';
             header("Location: dashboard.php");
 
         } else {
@@ -39,76 +66,51 @@ if(isset($_POST['submit'])) {
     }else $error_msg = "Some fields are empty";
 }
 
-
+include_once "header.php";
 ?>
-
-<html>
-
-    <head>
-
-        <title>Login</title>
-
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-
-        <style>
-
-            .form {
-
-                margin-left: 50px;
-
-            }
-
-        </style>
-
-        <script>
-
-            function signup() {
-                window.location.href = 'signup.php';
-                return false;
-            }
-
-        </script>
-    </head>
+<div class="split lleft" id="left">
+  <div class="centered">
+   <img src="assets/images/img_avatar2.png" alt="Login as Employee" onclick="ifleft()">
+   <h2 onclick="ifleft()">LOGIN AS A JOB SEEKER</h2>
+  </div>
+</div>
 
 
-    <body>
+<div class="split lright" id="right">
+  <div class="centered">
+   <img src="assets/images/img_avatar.png" alt="Login as Employer" onclick="ifright()" >
+    <h2 onclick="ifright()">LOGIN AS A JOB PROVIDER</h2>
+  </div>
+</div>
 
-
-    <!-- Textfield with Floating Label -->
-    <div class="form">
-    <form action="login.php" method="post">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="text" id="sample3" name="email" value="<?php if(!empty($_POST['email']))echo $_POST['email']; ?>">
-            <label class="mdl-textfield__label" for="sample3">Email</label>
-        </div>
-        <br>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-            <input class="mdl-textfield__input" type="password" id="sample3" name="password" value="<?php if(!empty($_POST['password'])) echo $_POST['password']; ?>">
-            <label class="mdl-textfield__label" for="sample3">Password</label>
-        </div>
-        <br>
-        <!-- Accent-colored raised button with ripple -->
-        <button name="submit" type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Login
-        </button>
-
+<div class="split lleft" id="leftreplace" style="display: none">
+  <div class="centered">
+    <span class="glyphicon glyphicon-remove" style="float: right" onclick="splitinit()"></span>
+    <center><h3 style="font-family:serif ; color:yellow"><em><i>Login</i></em></h3></center>
+    <form method="post" action="login.php">
+      <center>
+      <input type="text" id="logid" size="50%" name="unique-id" placeholder=" Enter Unique-ID" required><br>
+      <input type="text" id="logpass" size="50%" name="password" placeholder=" Enter Password" required><br>
+      <input type="submit" class="btn btn-danger" value="LOGIN" name="submit" style="margin-top:2px">
+      </center>
     </form>
-        <button onclick="signup()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-            Signup
-        </button>
+  </div>
+</div>
 
-        <?php
+<div class="split lright" id="rightreplace" style="display: none">
+  <div class="centered">
+    <span class="glyphicon glyphicon-remove" style="float: right" onclick="splitinit()"></span>
+    <center><h3 style="font-family:serif ; color:red"><em><i>Login</i></em></h3></center>
+    <form method="post" action="login.php">
+      <center>
+      <input type="email" id="logid" name="email" placeholder="  Enter Email-ID" size="50%" required><br>
+      <input type="text" id="logpass" size="50%" name="password" placeholder=" Enter Password" required><br>
+      <input type="submit" class="btn btn-danger" value="LOGIN" name="submit" style="margin-top:2px">
+      </center>
+    </form>
+  </div>
+</div>
 
-        echo $error_msg;
 
-        ?>
-
-
-    </div><br>
-
-    </body>
-
-
-</html>
+</body>
+</html> 
