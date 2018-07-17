@@ -4,11 +4,13 @@ include_once 'includes/login_database.php';
 include_once 'includes/functions.php';
 $error_msg = '';
 
-destroy_session();
+//destroy_session();
 
 if(!empty($_SESSION['id'])) {
-
-    header("Location: dashboard.php");
+    if($_SESSION['type'] =='Student')
+        header("Location: dashboard.php");
+    else
+        header("Location: empdash.php");
 
 }
 if(isset($_POST['submit'])) {
@@ -30,7 +32,7 @@ if(isset($_POST['submit'])) {
 
             $_SESSION['id'] = $id;
             $_SESSION['type'] = 'Employer';
-            header("Location: dashboard.php");
+            header("Location: empdash.php");
 
         } else {
 

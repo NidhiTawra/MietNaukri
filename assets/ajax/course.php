@@ -6,8 +6,11 @@
  * Time: 2:42 PM
  */
 
-include_once '../includes/login_database.php';
-include_once '../includes/functions.php';
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+
+include_once '../../includes/login_database.php';
+include_once '../../includes/functions.php';
 
 if(!empty($_GET['id'])) {
     $id = $_GET['id'];

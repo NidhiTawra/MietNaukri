@@ -29,7 +29,7 @@ CREATE TABLE `colleges` (
   `specialization_id` int(11) NOT NULL,
   `college_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `colleges` (
 
 LOCK TABLES `colleges` WRITE;
 /*!40000 ALTER TABLE `colleges` DISABLE KEYS */;
+INSERT INTO `colleges` VALUES ('MIET',3,2019,1,1);
 /*!40000 ALTER TABLE `colleges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,9 +80,9 @@ CREATE TABLE `employer` (
   `no_of_jobs_posted` int(11) NOT NULL DEFAULT '0',
   `access_level` enum('admin','employer') NOT NULL,
   `invited_by` int(11) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `unique_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Details for employer';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Details for employer';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,6 +91,7 @@ CREATE TABLE `employer` (
 
 LOCK TABLES `employer` WRITE;
 /*!40000 ALTER TABLE `employer` DISABLE KEYS */;
+INSERT INTO `employer` VALUES (1,'B109F3BBBC244EB82441917ED06D618B9008DD09B3BEFD1B5E07394C706A8BB980B1D7785E5976EC049B46DF5F1326AF5A2EA6D103FD07C95385FFAB0CACBC86',0,'employer',0,'EMP123');
 /*!40000 ALTER TABLE `employer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +138,7 @@ CREATE TABLE `jobs` (
   `last_date_for_apply` date NOT NULL,
   `posted_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Data for jobs';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Data for jobs';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,6 +147,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
+INSERT INTO `jobs` VALUES (1,'Google','Mobile App','Android Application','Design an Android Application',34,0,'2018-07-15','2018-08-15',1);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -266,7 +269,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (2,2399),(2,2410);
+INSERT INTO `locations` VALUES (2,2403),(3,2415);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,7 +285,7 @@ CREATE TABLE `resume` (
   `Student_id` int(11) NOT NULL,
   `resume_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`resume_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,6 +294,7 @@ CREATE TABLE `resume` (
 
 LOCK TABLES `resume` WRITE;
 /*!40000 ALTER TABLE `resume` DISABLE KEYS */;
+INSERT INTO `resume` VALUES ('1531592062.pdf',2,1),('1531592254.pdf',3,2);
 /*!40000 ALTER TABLE `resume` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,4 +412,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-06-26 11:46:59
+-- Dump completed on 2018-07-15 15:58:45

@@ -1,5 +1,5 @@
 <?php
-$file = basename($_SERVER['PHP_SELF'])
+$file = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,17 +42,11 @@ $file = basename($_SERVER['PHP_SELF'])
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Page 1-1</a></li>
-                        <li><a href="#">Page 1-2</a></li>
-                        <li><a href="#">Page 1-3</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li class="active"><a href="login.php">Home</a></li>
+                    <?php
+                    if($file == "dashboard.php") echo "<li><a href=\"apply.php\">Apply For Jobs</a></li>";
+                    elseif($file == "empdash.php") echo "<li><a href='post.php'>Post Jobs</a></li>";
+                    ?>
                 <li><?php
                     if ($error_msg != '') echo $error_msg;
                     ?></li>
@@ -64,8 +58,10 @@ $file = basename($_SERVER['PHP_SELF'])
                     echo "<li><a href=\"signup.php\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li>";
                 elseif($file == "signup.php")
                     echo "<li><a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
+                elseif($file == "index.php")
+                    echo "<li><a href=\"signup.php\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li><li><a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>";
                 else
-                    echo "<li><a href=\"signup.php\"><span class=\"glyphicon glyphicon-user\"></span> Sign Up</a></li><li><a href=\"login.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Login</a></li>"
+                    echo "<li><a href=\"logout.php\"><span class=\"glyphicon glyphicon-log-in\"></span> Logout</a></li>";
                 ?>
 
             </ul>
