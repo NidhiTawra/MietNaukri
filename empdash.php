@@ -5,4 +5,3 @@
  * Date: 7/15/18
  * Time: 2:22 PM
  */
-include_once 'header.php';

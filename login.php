@@ -10,7 +10,7 @@ if(!empty($_SESSION['id'])) {
     if($_SESSION['type'] =='Student')
         header("Location: dashboard.php");
     else
-        header("Location: empdash.php");
+        header("Location: post.php");
 
 }
 if(isset($_POST['submit'])) {
@@ -67,52 +67,3 @@ if(isset($_POST['submit'])) {
         }
     }else $error_msg = "Some fields are empty";
 }
-
-include_once "header.php";
-?>
-<div class="split lleft" id="left">
-  <div class="centered">
-   <img src="assets/images/img_avatar2.png" alt="Login as Employee" onclick="ifleft()">
-   <h2 onclick="ifleft()">LOGIN AS A JOB SEEKER</h2>
-  </div>
-</div>
-
-
-<div class="split lright" id="right">
-  <div class="centered">
-   <img src="assets/images/img_avatar.png" alt="Login as Employer" onclick="ifright()" >
-    <h2 onclick="ifright()">LOGIN AS A JOB PROVIDER</h2>
-  </div>
-</div>
-
-<div class="split lleft" id="leftreplace" style="display: none">
-  <div class="centered">
-    <span class="glyphicon glyphicon-remove" style="float: right" onclick="splitinit()"></span>
-    <center><h3 style="font-family:serif ; color:yellow"><em><i>Login</i></em></h3></center>
-    <form method="post" action="login.php">
-      <center>
-      <input type="text" id="logid" size="50%" name="unique-id" placeholder=" Enter Unique-ID" required><br>
-      <input type="text" id="logpass" size="50%" name="password" placeholder=" Enter Password" required><br>
-      <input type="submit" class="btn btn-danger" value="LOGIN" name="submit" style="margin-top:2px">
-      </center>
-    </form>
-  </div>
-</div>
-
-<div class="split lright" id="rightreplace" style="display: none">
-  <div class="centered">
-    <span class="glyphicon glyphicon-remove" style="float: right" onclick="splitinit()"></span>
-    <center><h3 style="font-family:serif ; color:red"><em><i>Login</i></em></h3></center>
-    <form method="post" action="login.php">
-      <center>
-      <input type="email" id="logid" name="email" placeholder="  Enter Email-ID" size="50%" required><br>
-      <input type="text" id="logpass" size="50%" name="password" placeholder=" Enter Password" required><br>
-      <input type="submit" class="btn btn-danger" value="LOGIN" name="submit" style="margin-top:2px">
-      </center>
-    </form>
-  </div>
-</div>
-
-
-</body>
-</html> 

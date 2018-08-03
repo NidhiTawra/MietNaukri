@@ -63,7 +63,7 @@ function check_file($file) {
 
 function destroy_session() {
 
-    session_unset();
+    $_SESSION = array();
     session_destroy();
 
 }

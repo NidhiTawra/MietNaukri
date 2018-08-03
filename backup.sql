@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.23, for Linux (x86_64)
 --
 -- Host: localhost    Database: mietnaukri
 -- ------------------------------------------------------
--- Server version	5.7.22-0ubuntu18.04.1
+-- Server version	5.7.23-0ubuntu0.18.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -29,7 +29,7 @@ CREATE TABLE `colleges` (
   `specialization_id` int(11) NOT NULL,
   `college_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`college_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `colleges` (
 
 LOCK TABLES `colleges` WRITE;
 /*!40000 ALTER TABLE `colleges` DISABLE KEYS */;
-INSERT INTO `colleges` VALUES ('MIET',3,2019,1,1);
+INSERT INTO `colleges` VALUES ('MIET',2,2019,1,1),('MIET',3,2019,1,2),('MIET',4,2019,1,3);
 /*!40000 ALTER TABLE `colleges` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,7 +138,7 @@ CREATE TABLE `jobs` (
   `last_date_for_apply` date NOT NULL,
   `posted_by` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Data for jobs';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='Data for jobs';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +147,7 @@ CREATE TABLE `jobs` (
 
 LOCK TABLES `jobs` WRITE;
 /*!40000 ALTER TABLE `jobs` DISABLE KEYS */;
-INSERT INTO `jobs` VALUES (1,'Google','Mobile App','Android Application','Design an Android Application',34,0,'2018-07-15','2018-08-15',1);
+INSERT INTO `jobs` VALUES (1,'Google','Mobile App','Android Application','Design an Android Application',1,3,'2018-07-15','2018-08-15',1),(2,'Amazon','Cloud Computing','EC2 Solutions','Provide ec2 solutions for people',1,1,'2018-07-15','2018-08-15',1),(3,'Microsoft','Windows Program','C# Developer','Develop windows 10 application using C#',1,0,'2018-07-15','2018-08-15',1);
 /*!40000 ALTER TABLE `jobs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +166,8 @@ CREATE TABLE `jobs_applied` (
   `phone` varchar(10) DEFAULT NULL,
   `email` varchar(50) NOT NULL,
   `college` varchar(50) NOT NULL,
-  PRIMARY KEY (`jobs_id`,`student_id`)
+  PRIMARY KEY (`jobs_id`,`student_id`),
+  CONSTRAINT `jobs_applied_ibfk_1` FOREIGN KEY (`jobs_id`) REFERENCES `jobs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Total no of applicants on the job';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -176,6 +177,7 @@ CREATE TABLE `jobs_applied` (
 
 LOCK TABLES `jobs_applied` WRITE;
 /*!40000 ALTER TABLE `jobs_applied` DISABLE KEYS */;
+INSERT INTO `jobs_applied` VALUES (1,2,'applied',2,'8126622339','ashwin.saxena24@gmail.com','MIET'),(1,4,'applied',1,'8126622339','ashwin.saxena24@gmail.com','MIET'),(2,2,'applied',2,'8126622339','ashwin.saxena24@gmail.com','MIET');
 /*!40000 ALTER TABLE `jobs_applied` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -269,7 +271,7 @@ CREATE TABLE `locations` (
 
 LOCK TABLES `locations` WRITE;
 /*!40000 ALTER TABLE `locations` DISABLE KEYS */;
-INSERT INTO `locations` VALUES (2,2403),(3,2415);
+INSERT INTO `locations` VALUES (2,2400),(2,2403),(2,2426),(3,2401),(3,2415),(4,2409);
 /*!40000 ALTER TABLE `locations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +287,7 @@ CREATE TABLE `resume` (
   `Student_id` int(11) NOT NULL,
   `resume_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`resume_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +296,7 @@ CREATE TABLE `resume` (
 
 LOCK TABLES `resume` WRITE;
 /*!40000 ALTER TABLE `resume` DISABLE KEYS */;
-INSERT INTO `resume` VALUES ('1531592062.pdf',2,1),('1531592254.pdf',3,2);
+INSERT INTO `resume` VALUES ('1532260662.pdf',2,1),('1532504726.pdf',3,2),('1533105167.doc',4,3);
 /*!40000 ALTER TABLE `resume` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,7 +369,7 @@ CREATE TABLE `student` (
   `no_of_jobs_applied` int(11) NOT NULL DEFAULT '0',
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 COMMENT='Table for students records';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 COMMENT='Table for students records';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -376,7 +378,7 @@ CREATE TABLE `student` (
 
 LOCK TABLES `student` WRITE;
 /*!40000 ALTER TABLE `student` DISABLE KEYS */;
-INSERT INTO `student` VALUES (1,'ashwin.saxena24@gmail.com','B109F3BBBC244EB82441917ED06D618B9008DD09B3BEFD1B5E07394C706A8BB980B1D7785E5976EC049B46DF5F1326AF5A2EA6D103FD07C95385FFAB0CACBC86','8126622339','0','1997-09-24','M',0,0,0,0,'Ashwin Saxena');
+INSERT INTO `student` VALUES (1,'ashwin.saxena24@gmail.com','B109F3BBBC244EB82441917ED06D618B9008DD09B3BEFD1B5E07394C706A8BB980B1D7785E5976EC049B46DF5F1326AF5A2EA6D103FD07C95385FFAB0CACBC86','8126622339','0','1997-09-24','M',0,0,0,1,'Ashwin Saxena'),(2,'lionelmessi240618@gmail.com','2dfe6706ac8e2c75f51afb2bab74adf7135eb4698306499b48eca77aaca121014c44ed14bd5b6a3f24c1220867cfc5e26d0b33035bffef7b145da6c483ac569c','8126622339','1532260662.pdf',NULL,NULL,0,0,2426,2,'Lionel Messi'),(3,'ashwin.saxena.cs.2015@miet.ac.in','2dfe6706ac8e2c75f51afb2bab74adf7135eb4698306499b48eca77aaca121014c44ed14bd5b6a3f24c1220867cfc5e26d0b33035bffef7b145da6c483ac569c','8126622339',NULL,NULL,NULL,0,0,2401,0,'Ashwin Saxena'),(4,'art@abc.com','2dfe6706ac8e2c75f51afb2bab74adf7135eb4698306499b48eca77aaca121014c44ed14bd5b6a3f24c1220867cfc5e26d0b33035bffef7b145da6c483ac569c','1234567890',NULL,NULL,NULL,0,0,2409,1,'Arti');
 /*!40000 ALTER TABLE `student` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -412,4 +414,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-07-15 15:58:45
+-- Dump completed on 2018-08-01 12:17:04

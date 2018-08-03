@@ -7,9 +7,7 @@
  */
 session_start();
 
-include_once 'header.php';
-
-//if(empty($_SESSION['id'])) header("Location: login.php");
+//if(empty($_SESSION['id'])) header("Location: index.php");
 
 include_once 'includes/login_database.php';
 include_once 'includes/functions.php';
@@ -64,78 +62,158 @@ if(isset($_POST['submit'])) {
 
 ?>
 
+<!DOCTYPE html>
 <html>
-
 <head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
 
-    <title>Signup</title>
+        <!--jQuery library--> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/js/select2.min.js"></script>
-
-    <style>
-
-        .form {
-
-            margin-left: 50px;
-            margin-top: 150px;
-
-        }
-
-    </style>
-
+        <!--Latest compiled and minified JavaScript--> 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="assets/stylesheets/index.css">
+		<title>Signup</title>
 
 </head>
-
-
 <body>
 
-<!--<datalist id="qualification"></datalist>-->
-<!--<datalist id="course"></datalist>-->
-<!--<datalist id="specialization"></datalist>-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+		
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#any">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="index.php">Miet Job Portal</a>
+		</div>
 
-<div class="form">
-<!-- Simple Textfield -->
-<form action="education.php" method="post">
+		<div class="collapse navbar-collapse" id="any">
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="logout.php"> <span class="glyphicon glyphicon-user"></span> Logout</a></li>
+			<!--<li><a href="loginaa.html"> <span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
+			</ul>
+		</div>
+		</div>
+	</nav>
 
-    Highest Qualification: <select id="qualification" name="qualification"></select><br><br>
-    Course: <select name="course" id="course" style="width: 300px"></select><br><br>
-    Specialization: <select name="specialization" style="width: 300px" id="specialization"></select><br><br>
+			<div class="container-fluid decor_bg" id="middle">
+                <div class="row">
+                    <div class="col-md-5 col-md-offset-4">
+                        <div class="panel panel-primary" >
+                            <div class="panel-heading">
+                                <h4>Educational Details</h4>
+                            </div>
+                            <div class="panel-body">
+                                <p class="text-warning"><i>Enter your educational details.</i><p><br>
+                                <form action="education.php" method="POST">
+                                    <div class="form-group">
 
-    <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="sample1" name="college" value="<?php if(!empty($_POST['college'])) echo $_POST['college'] ?>">
-        <label class="mdl-textfield__label" for="sample1">College</label>
-    </div>
-    <br>
+<div class="container">
+	<div class="row decor-bg">
+		<div class="col-md-4">
+			<table class="table table-light">
+				<tr>
+					<td>
+						<label for="qualification">
+                                  		Highest Qualification   	
+                        </label>
+                    </td>
+					<td>:</td>
+					<td>
+						<select class="custom-select form-control" style="width: 300px" id="qualification" name="qualification">
 
-    <!-- Numeric Textfield -->
-        <div class="mdl-textfield mdl-js-textfield">
-            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" name="year" value="<?php if(!empty($_POST['year'])) echo $_POST['year']  ?>">
-            <label class="mdl-textfield__label" for="sample2">Passing Year</label>
-            <span class="mdl-textfield__error">Input is not a number!</span>
-        </div><br>
+						</select>
+					</td>
+				</tr>
+<!---->
+<!--				<tr>-->
+<!--					<td>-->
+<!--						<label for="course_10_12_phd">-->
+<!--                                    		Course  	-->
+<!--                        </label>-->
+<!--                    </td>-->
+<!--					<td>:</td>-->
+<!--					<td>-->
+<!--						<select class="custom-select" id="course_10_12_phd" disabled>-->
+<!--  											<option selected>Not Found</option>-->
+<!--						</select>       -->
+<!--					</td>-->
+<!--				</tr>-->
 
-    <?php
-    $button = 'Add';
-    if(isset($_GET['register'])) {
-        include_once 'skills.php';
-        $button = 'Submit';
-    }
+				<tr>
+					<td>
+						<label for="course">
+                                    		Course  	
+                        </label>
+                    </td>
+					<td>:</td>
+					<td>
+						<select class="custom-select form-control" style="width: 300px" id="course" name="course">
+						</select>       
+					</td>
+				</tr>
 
-    ?>
+				<tr>
+					<td>
+						<label for="specialization">
+                            Specialization
+                        </label>
+                    </td>
+					<td>:</td>
+					<td>
+						<select class="custom-select form-control"  style="width: 300px" name="specialization" id="specialization">
 
-    <button type="submit" name="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
-        <?php echo $button; ?>
-    </button>
-</form>
+						</select>       
+					</td>
+				</tr>
 
-    <?php echo $error_msg; ?>
+				<tr>
+					<td colspan="3">
+						<div class="form-group"><input class="form-control" type="text" name="college" placeholder="College" required></div>
+                    </td>
+				</tr>
 
+				<tr>
+					<td colspan="3">
+						<div class="form-group"><input class="form-control" type="text" name="year" placeholder="Passing Year" required></div>
+                    </td>
+				</tr>
+
+				<tr>
+					<td>
+						<br><button type="submit" name="submit" class="btn btn-primary">Add</button>
+                    </td>
+				</tr>
+                <tr><?php
+                    if($error_msg != '') {
+                        echo "<div class=\"alert alert-danger\" role=\"alert\">$error_msg</div><br>";
+                    }
+                    ?></tr>
+			</table>
+		</div>
+	</div>
 </div>
+</div>
+                                    <br><br>
+                                </form><br/>
+                            </div>
+                            <div class="panel-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<footer>
+            <div class="container">
+                <center>
+                    <p>Copyright &copy; Miet. All Rights Reserved  |  Contact Us: +91 90000 00000</p>	
+                </center>
+            </div>
+</footer>
+
 
 <script>
 
@@ -221,6 +299,7 @@ if(isset($_POST['submit'])) {
 
 
 </script>
+
 
 </body>
 </html>
