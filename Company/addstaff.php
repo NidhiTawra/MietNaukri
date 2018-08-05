@@ -89,7 +89,7 @@ if(isset($_POST['submit'])) {
                 </div>
                 <div class="panel-body">
                     <p class="text-warning"><i>Add a Staff</i><p>
-                    <form action="staff.php" method="POST">
+                    <form action="addstaff.php" method="POST">
                         <?php
                         if($error_msg != '') {
                             echo "<div class=\"alert alert-danger\" role=\"alert\">$error_msg</div><br>";
@@ -172,7 +172,7 @@ if(isset($_POST['submit'])) {
     $('#company').ready(function () {
         datalist = document.getElementById('company')
         $.ajax({
-            url: 'ajax/company.php',
+            url: 'ajax/addcompany.php',
             type: 'GET',
             dataType: 'JSON',
             success: function (data) {

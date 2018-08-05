@@ -38,9 +38,9 @@ $success_msg = '';
         <div class="collapse navbar-collapse" id="any">
 
             <ul class="nav navbar-nav navbar-left">
-                <li><a href="company.php"> <span class="glyphicon glyphicon-log-out"></span> Add Company</a></li>
+                <li><a href="addcompany.php"> <span class="glyphicon glyphicon-log-out"></span> Add Company</a></li>
                 <li><a href="updatecomp.php"> <span class="glyphicon glyphicon-dashboard"></span> Update Company</a></li>
-                <li><a href="staff.php"> <span class="glyphicon glyphicon-wrench"></span> Add Staff</a></li>
+                <li><a href="addstaff.php"> <span class="glyphicon glyphicon-wrench"></span> Add Staff</a></li>
                 <li><a href="updatestaff.php"> <span class="glyphicon glyphicon-log-out"></span> Update Staff</a></li>
             </ul>
         </div>
