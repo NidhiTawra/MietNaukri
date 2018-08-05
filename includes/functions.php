@@ -37,6 +37,10 @@ function check_password($password) {
 
 }
 
+function check_url($url) {
+    return preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$url);
+}
+
 function check_number($number) {
 
     return preg_match("/^[\d]{10}$/",$number);
